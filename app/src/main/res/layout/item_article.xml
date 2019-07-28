@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="obj"
+            type="com.example.carousellnewsapp.models.Article"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/article_container"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:cardCornerRadius="@dimen/article_item_corner_radius"
+        app:cardBackgroundColor="@color/articleBackground"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_article_banner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/banner_height"
+                android:scaleType="centerCrop"
+                android:background="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:bannerImage="@{obj.bannerUrl}"
+                android:contentDescription="@string/banner_description"/>
+
+            <TextView
+                android:id="@+id/tv_article_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_article_banner"
+                android:textColor="@color/articleTitleColor"
+                android:ellipsize="end"
+                android:text="@{obj.title}"
+                android:layout_marginTop="@dimen/article_title_margin_top"
+                android:layout_marginStart="@dimen/article_title_left_right_margin"
+                android:layout_marginRight="@dimen/article_title_left_right_margin"
+                android:layout_marginLeft="@dimen/article_title_left_right_margin"
+                android:layout_marginEnd="@dimen/article_title_left_right_margin"
+                android:textSize="@dimen/article_title_font_size"
+                android:maxLines="@integer/article_title_max_lines"
+                tools:text="Congrats! You are featured on Home page as a recommended seller!"
+                android:fontFamily="@font/roboto_medium"/>
+
+            <TextView
+                android:id="@+id/tv_article_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:ellipsize="end"
+                android:text="@{obj.description}"
+                android:textColor="@color/articleDescriptionColor"
+                android:textSize="@dimen/article_description_font_size"
+                tools:text="Hi rita12399, thank you for being awesome on Carousell! We want more Carousellers see you and your listings and hope you can keep up the good listings and bring good experience to fellow Carousellers."
+                app:layout_constraintStart_toStartOf="@+id/tv_article_title"
+                android:maxLines="@integer/article_description_max_lines"
+                android:layout_marginTop="@dimen/article_description_margin_top"
+                app:layout_constraintEnd_toEndOf="@+id/tv_article_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_article_title"/>
+
+            <TextView
+                android:id="@+id/tv_relative_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                app:layout_constraintTop_toBottomOf="@+id/tv_article_description"
+                app:layout_constraintStart_toStartOf="@+id/tv_article_title"
+                android:textSize="@dimen/article_time_font_size"
+                tools:text="5 hours ago"
+                app:relativeTime="@{obj.timeCreated}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/article_time_bottom_margin"
+                android:layout_marginTop="@dimen/article_time_margin_top"
+                android:textColor="@color/articleRelativeTimeColor"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
