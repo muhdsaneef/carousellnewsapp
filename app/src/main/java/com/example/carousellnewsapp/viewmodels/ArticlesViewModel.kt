@@ -23,7 +23,7 @@ class ArticlesViewModel : ViewModel() {
 
     var loadingInProgress = ObservableBoolean()
     var articlesFound = ObservableBoolean()
-    var isNetworkAvailable = true
+    private var isNetworkAvailable = true
 
     init {
         viewModelComponent.inject(this)
@@ -36,6 +36,15 @@ class ArticlesViewModel : ViewModel() {
         articlesRepository.successCallback = {
             loadingInProgress.set(false)
             handleSuccessResponse(it)
+        }
+    }
+
+    fun setNetworkStatus(networkAvailable: Boolean) {
+        if (!isNetworkAvailable && networkAvailable) {
+            isNetworkAvailable = networkAvailable
+            fetchNewsArticles()
+        } else {
+            isNetworkAvailable = networkAvailable
         }
     }
 
@@ -77,7 +86,7 @@ class ArticlesViewModel : ViewModel() {
     }
 
     private fun filterArticles(shouldFilterByPopularity: Boolean) {
-        var currentArticles = articleList.value
+        val currentArticles = articleList.value
         currentArticles?.let {
             if (shouldFilterByPopularity) {
                 articleList.value = currentArticles.sortedWith(compareBy({ -it.rank }, { -it.timeCreated }))

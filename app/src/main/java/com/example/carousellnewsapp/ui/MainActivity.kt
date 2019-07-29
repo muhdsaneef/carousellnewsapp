@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
     private fun setObserverForArticleListChanges() {
         viewModel.getArticlesList().observe(this, Observer {
             articlesAdapter.addArticles(it)
+            binding.content.rvArticles.smoothScrollToPosition(0)
         })
     }
 
@@ -100,7 +101,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setObserverForConnectivityChanges() {
         connectivityChangeReceiver.connectionChangeListener = {
-            viewModel.isNetworkAvailable = it
+            viewModel.setNetworkStatus(it)
         }
     }
 
