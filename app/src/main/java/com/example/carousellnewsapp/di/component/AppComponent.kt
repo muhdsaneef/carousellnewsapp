@@ -11,16 +11,4 @@ import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 
 @Component(modules = [AndroidInjectionModule::class, AppModule::class, ActivityModule::class, ArticleBindingModule::class])
-interface AppComponent : AndroidInjector<CarousellApplication> {
-
-    @Component.Builder
-    interface Builder {
-        @BindsInstance
-        fun application(application: Application): Builder
-
-        fun build(): AppComponent
-    }
-
-    fun injectApplication(carousellApplication: CarousellApplication)
-
-}
+interface AppComponent : AndroidInjector<CarousellApplication> {}

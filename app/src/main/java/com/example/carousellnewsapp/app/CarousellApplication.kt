@@ -15,8 +15,8 @@ class CarousellApplication : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
-        val appComponent = DaggerAppComponent.builder().application(this).build()
-        appComponent.injectApplication(this)
+        val appComponent = DaggerAppComponent.create()
+        appComponent.inject(this)
     }
 
     override fun activityInjector(): AndroidInjector<Activity> {
